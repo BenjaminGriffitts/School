@@ -13,6 +13,10 @@ public class School {
         Person.printNames();
         Person.printNames(Person.Gender.Male);
         System.out.println(jill);
-        Person.printWeights();
+        Course geom = Course.addCourse(Course.Type.Math, "Geometry", 1);
+        Course photo = Course.addCourse(Course.Type.Elective, "Photography", 2);
+        Course.printNames();
+        System.out.println(photo);
+        
     }
 }

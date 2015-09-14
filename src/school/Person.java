@@ -35,7 +35,7 @@ public class Person {
     {
         return(name);
     }
-    public double getWeight()
+    public int getWeight()
     {
         return(weight);
     }
@@ -77,17 +77,6 @@ public class Person {
                 {
                     System.out.println(temp.getName());
                 }
-            }
-        }
-    }
-    public static void printWeights()
-    {
-        System.out.println("----Weights----");
-        for (Person temp : people)
-        {
-            if (temp != null)
-            {
-                System.out.println(temp.getWeight());
             }
         }
     }
