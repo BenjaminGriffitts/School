@@ -1,6 +1,7 @@
 package school;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 public class Person {
     enum Gender{
         Male, Female
@@ -11,13 +12,20 @@ public class Person {
     private Gender gender;
     private String name;
     
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
+    
     public static Person addPerson(Gender _gender,String _name,int _weight)
     {
         Person temp = new Person(_gender,_name,_weight);
         people.add(temp);
         return(temp);
     }
-    
+    public static void addPerson(Person _person)
+    {
+        people.add(_person);
+    }
     Person()
     {
         name = "Danielson";
@@ -30,7 +38,30 @@ public class Person {
         name = _name;
         weight = _weight;
     }
-    
+    public void setBirthdate(int _day, int _month, int _year)
+    {
+        birthDay = _day;
+        birthMonth = _month;
+        birthYear = _year;
+    }
+    public int getAge()
+    {
+        Calendar now = Calendar.getInstance();
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        int month = now.get(Calendar.MONTH) + 1;
+        int year = now.get(Calendar.YEAR);
+        int age = year - birthYear;
+        if(birthMonth==month && birthDay>day)
+        {
+            age--;
+        }
+        else if(birthMonth>month)
+        {
+            age--;
+        }
+
+        return age;
+    }
     public String getName()
     {
         return(name);
