@@ -9,6 +9,7 @@ public class Course {
     private Type type;
     private int period;
     private String name;
+    private Student theStudent;
     
     public static Course addCourse(Type _type,String _name,int _period)
     {
@@ -27,6 +28,14 @@ public class Course {
         type = _type;
         name = _name;
         period = _period;
+    }
+    public void addStudent(Student _student)
+    {
+        if(theStudent == null)
+        {
+            theStudent = _student;
+            _student.addCourse(this);
+        }
     }
     public String getName()
     {

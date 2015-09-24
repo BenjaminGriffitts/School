@@ -7,10 +7,11 @@ public class Person {
         Male, Female
     }
 
-    private static ArrayList<Person> people = new ArrayList<Person>();
+    protected static ArrayList<Person> people = new ArrayList<Person>();
     private int weight;
     private Gender gender;
     private String name;
+    
     
     private int birthDay;
     private int birthMonth;
@@ -62,6 +63,7 @@ public class Person {
 
         return age;
     }
+    
     public String getName()
     {
         return(name);
