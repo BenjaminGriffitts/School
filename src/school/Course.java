@@ -6,10 +6,13 @@ public class Course {
         Math, Science, English, Language, History, Elective, PE
     }
     private static ArrayList<Course> courses = new ArrayList<Course>();
+    private ArrayList<Student> students = new ArrayList<Student>();
     private Type type;
     private int period;
     private String name;
-    private Student theStudent;
+    public static final int numPeriods = 4;
+//    private Student theStudent;
+    private Teacher theTeacher;
     
     public static Course addCourse(Type _type,String _name,int _period)
     {
@@ -31,11 +34,53 @@ public class Course {
     }
     public void addStudent(Student _student)
     {
-        if(theStudent == null)
+        if (!setStudentOK(_student))
+            return;
+        if (!_student.setCourseOK(this))
+            return;
+        _student.setCourseDoIt(this);
+        setStudentDoIt(_student);
+    }
+    public void setStudentDoIt(Student _student)
+    {
+        students.add(_student);
+    }
+    public boolean setStudentOK(Student _student)
+    {
+        if(_student == null)
+            return(false);
+        
+        for (Student temp : students)
         {
-            theStudent = _student;
-            _student.addCourse(this);
+            if (temp == _student)
+                return(false);
         }
+        return(true);
+    }
+    public void setTeacherDoIt(Teacher _teacher)
+    {
+        theTeacher = _teacher;
+    }
+    public boolean setTeacherOK(Teacher _teacher)
+    {
+        if(_teacher == null)
+            return(false);
+        
+        if(theTeacher == _teacher)
+            return(false);
+        
+        return(true);
+    }
+    public boolean addTeacher(Teacher _teacher)
+    {
+        if (!setTeacherOK(_teacher))
+            return(false);
+        if (!_teacher.setCourseOK(this))
+            return(false);
+        _teacher.setCourseDoIt(this);
+        setTeacherDoIt(_teacher);
+        
+        return(true);
     }
     public String getName()
     {
@@ -48,6 +93,10 @@ public class Course {
     public Type getType()
     {
         return(type);
+    }
+    public Teacher getTeacher()
+    {
+        return(theTeacher);
     }
     public void setName(String _name)
     {

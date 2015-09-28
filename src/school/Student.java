@@ -1,9 +1,8 @@
-
 package school;
 
 public class Student extends Person{    
     private int gradeLevel;
-    private Course theCourse;
+    private Course courses[] = new Course[4];
     
      public static Student addStudent(Gender _gender,String _name,int _weight,int _gradeLevel)
     {
@@ -11,13 +10,29 @@ public class Student extends Person{
         addPerson(temp);
         return(temp);
     }
-     public void addCourse(Course _course)
+    public boolean addCourse(Course _course)
     {
-        if(theCourse == null)
-        {
-            theCourse = _course;
-            _course.addStudent(this);
-        }
+        if (!setCourseOK(_course))
+            return(false);
+        if (!_course.setStudentOK(this))
+            return(false);
+        _course.setStudentDoIt(this);
+        setCourseDoIt(_course);
+        
+        return(true);
+    }
+    public void setCourseDoIt(Course _course)
+    {
+        courses[_course.getPeriod()-1] = _course;
+    }
+    public boolean setCourseOK(Course _course)
+    {
+        if(_course == null)
+        return(false);
+        if(courses[_course.getPeriod()-1] != null)
+        return(false);
+        
+        return(true);
     }
     Student(Gender _gender,String _name,int _weight,int _gradeLevel)
     {
